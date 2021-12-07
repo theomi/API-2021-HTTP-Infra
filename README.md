@@ -1,4 +1,4 @@
-# Labo HTTPi Infra
+# Labo HTTP Infra
 
 ## Objectives
 
