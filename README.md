@@ -1,4 +1,4 @@
-# Teaching-HEIGVD-RES-2021-Labo-HTTPInfra
+# Labo HTTPi Infra
 
 ## Objectives
 
