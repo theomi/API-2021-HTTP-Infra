@@ -12,7 +12,7 @@ Pour cette partie, nous avons décidé de choisir le serveur web `nginx` car il 
 
 ## Construction de l'image Docker
 
-Pour construire l'image Docker, nous avons choisi d'utiliser `docker compose` car cela permet de combiner plusieurs services (donc plusieurs images Docker) en un seul container. Bien que cela ne soit pas indispensable pour cette partie (ca r nous ne déployons qu'un seul service qui est nginx) cela nous a semblé judicieux car on peut y spécifier les ports et volumes directement ce qui simplifie l'utilisation.
+Pour construire l'image Docker, nous avons choisi d'utiliser `docker compose` car cela permet de combiner plusieurs services (donc plusieurs images Docker) en un seul container. Bien que cela ne soit pas indispensable pour cette partie (car nous ne déployons qu'un seul service qui est nginx) cela nous a semblé judicieux car on peut y spécifier les ports et volumes directement ce qui simplifie l'utilisation.
 
 ## Volumes
 
