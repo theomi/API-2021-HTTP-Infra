@@ -1,3 +1,3 @@
 #!/bin/bash
 
-docker build -t rproxy .
+docker build -t api/rproxy .
