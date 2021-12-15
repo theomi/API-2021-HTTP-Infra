@@ -1,6 +1,5 @@
-FROM node:16.13.1
+FROM nginx:latest
 
-WORKDIR ../
-COPY ./src /opt/app
+EXPOSE 80
 
-CMD ["node", "/opt/app/index.js"]
+COPY ./conf/default.conf /etc/nginx/conf.d/default.conf
