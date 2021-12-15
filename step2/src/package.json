@@ -1,0 +1,14 @@
+{
+  "name": "src",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Mirabile Théo, Louis Hadrien",
+  "license": "ISC",
+  "dependencies": {
+    "chance": "^1.1.8"
+  }
+}
