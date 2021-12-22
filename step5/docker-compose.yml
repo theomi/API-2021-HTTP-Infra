@@ -17,7 +17,6 @@ services:
         container_name: nginx
         build:
             context: ../step3/
-            dockerfile: Dockerfile
         restart: always
 
     express:
@@ -27,5 +26,4 @@ services:
         container_name: express
         build:
             context: ../step4/
-            dockerfile: Dockerfile
         restart: always
