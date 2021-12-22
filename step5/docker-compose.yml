@@ -1,11 +1,31 @@
-rproxy:
-  image: nginx:latest
-  volumes:
-   - ./conf:/etc/nginx/conf.d
-  ports:
-   - "8080:80"
-  environment:
-   - STATIC_APP_DIR=/
-   - DYNAMIC_APP_DIR=/api/students
+version: "3"
 
+services:
+    rproxy:
+        image: nginx:latest
+        container_name: rproxy_dyn
+        volumes:
+            - ./conf:/etc/nginx
+        ports:
+            - "8080:80"
+        restart: always
 
+    nginx:
+        depends_on:
+            - rproxy
+        image: api/nginx
+        container_name: nginx
+        build:
+            context: ../step3/
+            dockerfile: Dockerfile
+        restart: always
+
+    express:
+        depends_on:
+            - rproxy
+        image: api/express
+        container_name: express
+        build:
+            context: ../step4/
+            dockerfile: Dockerfile
+        restart: always
