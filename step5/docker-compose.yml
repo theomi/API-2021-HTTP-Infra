@@ -1,0 +1,11 @@
+rproxy:
+  image: nginx:latest
+  volumes:
+   - ./conf:/etc/nginx/conf.d
+  ports:
+   - "8080:80"
+  environment:
+   - STATIC_APP_DIR=/
+   - DYNAMIC_APP_DIR=/api/students
+
+
