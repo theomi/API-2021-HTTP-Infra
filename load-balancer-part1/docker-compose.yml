@@ -1,0 +1,60 @@
+version: '3'
+
+services:
+  reverse-proxy:
+    image: traefik:v2.5
+    command: 
+      - --api.insecure=true 
+      - --providers.docker=true
+      - --entrypoints.web.address=:80
+    ports:
+      - "80:80"
+      - "8080:8080"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - net-rproxy 
+  web:
+    image: api/nginx
+    restart: always
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.nginx.rule=Host(`localhost`)
+      - traefik.http.routers.nginx.entrypoints=web
+    depends_on:
+        - reverse-proxy
+    build:
+        context: ../step3/
+    networks:
+      - net-rproxy
+  express:
+    image: api/express
+    restart: always
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.express.rule=Host(`localhost`) && PathPrefix(`/api/students`)
+      - traefik.http.routers.express.middlewares=express-stripprefix
+      - traefik.http.middlewares.express-stripprefix.stripprefix.prefixes=/api/students
+      - traefik.http.routers.express.entrypoints=web
+    depends_on:
+        - rproxy
+    build:
+        context: ../step4/
+    networks:
+      - net-rproxy
+  whoami:
+    image: traefik/whoami
+    restart: always
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.whoami.rule=Host(`localhost`) && PathPrefix(`/whoami`)
+      - traefik.http.routers.whoami.middlewares=whoami-stripprefix
+      - traefik.http.middlewares.whoami-stripprefix.stripprefix.prefixes=/whoami
+      - traefik.http.routers.whoami.entrypoints=web
+    depends_on:
+        - rproxy
+    networks:
+      - net-rproxy    
+
+networks:
+  net-rproxy:
