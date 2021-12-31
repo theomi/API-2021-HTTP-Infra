@@ -1,17 +1,10 @@
-(function($) {
-    function loadStudents() {
-        $.getJSON("/api/students/", function(students) {
-            console.log(students)
-            let message = "Nobody is here"
-            if (students.length > 0) {
-                message = students[0].firstName + " " + students[0].lastName
-            }
-            $("#api-students").text(message)
-        })
+setInterval(async() => {
+    const students = await fetch('/api/students/').then(response => response.json());
+    
+    let message = "Nobody is here"
+    if (students.length > 0) {
+        message = students[0].firstName + " " + students[0].lastName
     }
 
-    loadStudents();
-
-    setInterval(loadStudents, 2000)
-
-})(jQuery);
+    document.getElementById("api-students").innerHTML = message
+}, 2000)
