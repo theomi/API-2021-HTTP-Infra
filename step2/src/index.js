@@ -15,46 +15,38 @@ app.listen(3000, function () {
 
 // Si la route racine est appelée, on exécute ce code
 app.get("/", function (req, res) {
-  // Retourne le résultat de la procédure generateStudents
-  res.send(generateStudents());
+  // Retourne le résultat de la procédure generateAnimals
+  res.send(generateAnimals());
 });
 
 /*
- * @brief Génère des coordonnées d'étudiants aléatoirement
+ * @brief Génère des noms d'animaux aléatoirement
  */
-function generateStudents() {
-  // Le nombre d'étudiants générés est sous la forme
+function generateAnimals() {
+  // Le nombre d'animaux générés est sous la forme
   // d'un entier aléatoire entre compris entre 0 et 10
-  var studentsCount = chance.integer({
+  var animalsCount = chance.integer({
     min: 0,
     max: 10,
   });
 
-  console.log("The students count is " + studentsCount);
-  var students = [];
+  console.log("The animals count is " + animalsCount);
+  var animals = [];
+  
+  // liste de tous les types d'animaux possibles
+  var types = ["ocean", "desert", "grassland", "forest", "farm", "pet", "zoo"];
 
-  // Détermine un genre et une date de naissance pour chaque étudiant
-  for (var i = 0; i < studentsCount; i++) {
-    var gender = chance.gender();
-    var birthYear = chance.year({
-      min: 1986,
-      max: 1996,
-    });
+  for (var i = 0; i < animalsCount; i++) {
+    // Sélectionne un type d'animal aléatoirement dans la liste
+    var randomType = types[Math.floor(Math.random()*types.length)];
 
-    // Génère un prénon, nom et date d'anniversaire
-    students.push({
-      firstName: chance.first({
-        gender: gender,
-      }),
-      lastName: chance.last(),
-      gender: gender,
-      birthday: chance.birthday({
-        year: birthYear,
-      }),
+    animals.push({
+      type: randomType,
+      animal: chance.animal({type: randomType}),
     });
   }
 
   // Affiche et retourne le résultat
-  console.log(students);
-  return students;
+  console.log(animals);
+  return animals;
 }

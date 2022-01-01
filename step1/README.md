@@ -66,6 +66,6 @@ Comme pour le laboratoire précédent, nous avons décidé de créer 4 différen
 
 ## Résultat obtenu
 
-Une fois le container lancé et que l'on se rend sur `localhost:8080` avec son navigateur, on obtient le résulat suivant
+Une fois le container lancé et que l'on se rend sur `localhost:8080` avec son navigateur, on obtient le résultat suivant
 
 ![Résultat](figures/result.png)
