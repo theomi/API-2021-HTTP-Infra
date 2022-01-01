@@ -63,3 +63,9 @@ Comme pour le laboratoire précédent, nous avons décidé de créer 4 différen
 - `start.sh` Permet de démarrer le/les containers basés sur les images créées précédemment. De manière générale, les containers ont souvent un port de mappé
 - `stop.sh` Permet de stopper le/les containers
 - `start_noport.sh` Permet de démarrer le/les containers basés sur les images créées précédemment mais cette fois ci sans mapper de port.
+
+## Résultat obtenu
+
+Une fois le container lancé et que l'on se rend sur `localhost:8080` avec son navigateur, on obtient le résulat suivant
+
+![Résultat](figures/result.png)

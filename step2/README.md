@@ -4,21 +4,27 @@
 
 Hadrien Louis & Théo Mirabile
 
----
-
 ## Installation de node.js et de Chance.js
 
 ### Initialisation du projet npm
 
 On crée tout d'abord un répertoire `src` qui contiendra les sources de notre application web.
 
-- On initialise ensuite un projet npm :
+On initialise ensuite un projet npm :
 
 ```sh
 npm init
 ```
 
 On peut donner un nom à notre projet, une version, un descriptif, le nom de notre point d'entrée, et d'autres informations. Dans le cas de ce labo, nous avons renseigné le nom et la version par défaut, ainsi que le nom de l'auteur.
+
+## Installation de express.js
+
+Pour installer express.js, il suffit d'exécuter cette commande dans le répertoire de notre projet npm :
+
+```sh
+npm install express
+```
 
 ### Installation de Chance.js
 
@@ -62,15 +68,7 @@ CMD ["node", "/opt/app/index.js"]
 On peut ensuite construire notre image Docker en exécutant la commande suivante, dans le même répertoire que celui du Dockerfile :
 
 ```sh
-docker build -t api/express
-```
-
-## Installation de express.js
-
-Pour installer express.js, il suffit d'exécuter cette commande dans le répertoire de notre projet npm :
-
-```sh
-npm install
+docker build -t api/express .
 ```
 
 ## Implémentation de l'application web
@@ -109,7 +107,7 @@ app.get("/", function (req, res) {
 });
 ```
 
-Il ne reste plus qu'à implémenter cette fameuse fonction `generateStudents` qui a pour effet de générer des coordonnées d'étudiants aléatoirement en utilisant Chance.js. Voici son implémentation commentée :
+Il ne reste plus qu'à implémenter cette fameuse fonction `generateStudents` qui a pour effet de générer des coordonnées d'étudiants aléatoirement en utilisant Chance.js. Le contenu est généré au format JSON. Voici son implémentation commentée :
 
 ```js
 /*
@@ -152,3 +150,8 @@ function generateStudents() {
   return students;
 }
 ```
+## Résultat obtenu
+
+Une fois le container lancé et que l'on se rend sur `localhost:3000` avec son navigateur, on obtient le résulat suivant
+
+![Résultat](figures/chance_json_result.png)
