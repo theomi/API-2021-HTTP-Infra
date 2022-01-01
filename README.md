@@ -14,7 +14,7 @@ Auteurs : Hadrien Louis & Théo Mirabile
 
 - [Etape 5: Configuration dynamique du reverse proxy](https://github.com/theomi/API-2021-HTTP-Infra/tree/master/step5)
 
-## Accès aux étapes aditionnelles
+## Accès aux étapes additionnelles
 
 - [Load balancing : avec plusieurs serveurs noeuds](https://github.com/theomi/API-2021-HTTP-Infra/tree/master/load-balancer-part1)
 

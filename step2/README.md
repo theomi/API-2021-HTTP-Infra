@@ -38,24 +38,31 @@ Il faut tout d'abord créer un Dockerfile qui va effectuer les opérations suiva
 
 - Copier les sources de notre application web sur le container
 
+- Exposer le port 3000
+
+- Lancer l'installation du projet avec npm. L'installation va se baser sur le fichier `package.json` qui contient les deux dépendances `express` et `chance` qui vont être intallées
+
 - Demander à node de lancer l'application
 
 Au final, le contenu du fichier Dockerfile est :
 
-```
+```Dockerfile
 FROM node:16.13.1
 
 WORKDIR ../
 COPY ./src /opt/app
 
+EXPOSE 3000
+
+WORKDIR /opt/app
+RUN npm install
 CMD ["node", "/opt/app/index.js"]
 ```
 
 On peut ensuite construire notre image Docker en exécutant la commande suivante, dans le même répertoire que celui du Dockerfile :
 
-```
-docker build -t theomi/no
-de .
+```sh
+docker build -t api/express
 ```
 
 ## Installation de express.js
@@ -63,7 +70,7 @@ de .
 Pour installer express.js, il suffit d'exécuter cette commande dans le répertoire de notre projet npm :
 
 ```sh
-npm install --save express
+npm install
 ```
 
 ## Implémentation de l'application web
