@@ -27,13 +27,13 @@ Pour configurer un serveur nginx en mode reverse-proxy, il nous a suffi de défi
 Nous avons donc défini 2 configurations :
 
 - `/` qui pointe vers le site statique HTML sur le port 80 (étape 1)
-- `/api/students/` qui pointe vers le site dynamique JS sur le port 3000 (étape 2)
+- `/api/animals/` qui pointe vers le site dynamique JS sur le port 3000 (étape 2)
 
 ```nginx
 server {
     ...
 
-    location /api/students/ {
+    location /api/animals/ {
         proxy_pass http://172.17.0.3:3000/;
     }
 
@@ -59,9 +59,10 @@ Une fois les 3 containers lancés et que l'on se rend sur `localhost:8080` avec 
 
 ![Résultat 1](figures/static_site.png)
 
-`localhost:8080/api/students/`
+`localhost:8080/api/animals/`
 
 ![Résultat 2](figures/dyn_site.png)
 
 Statut des containers docker. Cette image montre bien que seul le reverse proxy est accessible via le port mappé `8080` alors que les deux autres containers des sites statique et dynamique ne sont pas accessibles directement
+
 ![Résultat](figures/docker.png)

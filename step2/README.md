@@ -46,7 +46,7 @@ Il faut tout d'abord créer un Dockerfile qui va effectuer les opérations suiva
 
 - Exposer le port 3000
 
-- Lancer l'installation du projet avec npm. L'installation va se baser sur le fichier `package.json` qui contient les deux dépendances `express` et `chance` qui vont être intallées
+- Lancer l'installation du projet avec `npm intall`. L'installation va se baser sur le fichier `package.json` qui contient les deux dépendances `express` et `chance` qui vont être intallées. Il est important de noter que le dossier `node_modules` n'est pas copié. Nous avons utilisé un fichier `.dockerignore` afin de spécifier les éléments à ignorer lors de la copie
 
 - Demander à node de lancer l'application
 
