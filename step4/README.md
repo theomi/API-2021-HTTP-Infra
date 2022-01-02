@@ -55,9 +55,14 @@ Lorsque l'on se rend sur `localhost:8080`, on  obtient bien le résultat suivant
 
 ![Résultat 1](figures/animation.gif)
 
-Si l'on ouvre les devtools, nous pouvons voir les requêtes faites à l'API :
+Si l'on ouvre les `devtools`, nous pouvons voir les requêtes faites à l'API :
 
 ![Résultat 2](figures/http_response.png)
 
+et la réponse obtenue :
+
+![Résultat 3](figures/http_response_2.png)
+
 Comme pour l'étape précédente, voici la liste des containers qui tournent sur la machine. On observe que seul le reverse proxy possède un port de mappé.
-![Résultat 2](figures/docker_container.png)
+
+![Résultat 4](figures/docker_container.png)

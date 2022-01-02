@@ -10,7 +10,7 @@ Contrairement à ce qui est proposé dans les diverses viédos du labo, nous n'a
 
 ## Configuration Docker
 
-Comme annoncé ci-dessus, nous avons utilisé un `docker-compose` pour cette étape du labo. Ceci va nous permettre de spécifier dans un seul fichier les divers container à faire tourner. 
+Comme annoncé ci-dessus, nous avons utilisé `docker-compose` pour cette étape du labo. Ceci va nous permettre de spécifier dans un seul fichier les divers container à faire tourner. 
 
 Dans le ficher `docker-compose.yml` on y trouve la déclaration des 3 services à faire tourner à savoir : `nginx`, `express` et le reverse proxy `rproxy`. Pour chaque service, nous déclarons la configuration suivante :
 
