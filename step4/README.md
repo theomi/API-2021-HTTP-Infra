@@ -1,9 +1,9 @@
 # Labo HTTP Infra
 
-## Etape 1 : Serveur HTTP statique sous nginx
+## Etape 4 : Requêtes AJAX avec jQuery
 
 Hadrien Louis & Théo Mirabile
 
----
+## 
 
 TODO

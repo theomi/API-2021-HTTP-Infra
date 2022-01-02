@@ -6,7 +6,7 @@ Hadrien Louis & Théo Mirabile
 
 ## Installation de node.js et de Chance.js
 
-Pour le bon fonctionnement de cette étape, nous allons utiliser les 2 containers Docker créés durants les deux étapes précédentes du labo. Ces deux containers devront être démarrés au moyen du script `start_noport.sh` ce qui aura comme effet de ne pas mapper de port au container. C'est le reverse proxy qui se charge de distribuer le contenu.
+Pour le bon fonctionnement de cette étape, nous allons utiliser les 2 containers Docker créés durants les deux étapes précédentes du labo. Ces deux containers devront être démarrés au moyen du script `start_noport.sh` ce qui aura comme effet de ne pas mapper de port au container. Il sera alors impossible d'accéder au site. C'est le container du reverse proxy qui aura un port de mappé et qui se chargera de distribuer le contenu.
 
 ## Création du Dockerfile
 
@@ -49,7 +49,7 @@ Une grosse problématique avec cette configuration (qui sera améliorée par la 
 
 ## Démarrer le reverse-proxy
 
-Pour démarrer le revserse-proxy, il suffit de lancer le script `start.sh`. Ceci avoir comme effet de mapper le port `8080`
+Pour démarrer le revserse-proxy, il suffit de lancer le script `start.sh`. Ceci va avoir comme effet de mapper le port `8080`. Avant de faire ceci il faut avoir lancé au préalable les deux autres containers des sites statique et dynamique afin de connaitre leur IP et changer la config nginx si besoin.
 
 ## Résultat obtenu
 
@@ -63,5 +63,5 @@ Une fois les 3 containers lancés et que l'on se rend sur `localhost:8080` avec 
 
 ![Résultat 2](figures/dyn_site.png)
 
-Statut des containers docker
+Statut des containers docker. Cette image montre bien que seul le reverse proxy est accessible via le port mappé `8080` alors que les deux autres containers des sites statique et dynamique ne sont pas accessibles directement
 ![Résultat](figures/docker.png)
