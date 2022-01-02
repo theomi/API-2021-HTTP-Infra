@@ -16,10 +16,10 @@ Auteurs : Hadrien Louis & Théo Mirabile
 
 ## Accès aux étapes additionnelles
 
+- [Gestion du cluster dynamique (Traefik) - TODO](https://github.com/theomi/API-2021-HTTP-Infra/tree/master/traefik)
+
 - [Load balancing : avec plusieurs serveurs noeuds - TODO](https://github.com/theomi/API-2021-HTTP-Infra/tree/master/load-balancer-part1)
 
 - [Load balancing : round robin et sticky sessions - TODO](https://github.com/theomi/API-2021-HTTP-Infra/tree/master/load-balancer-part2)
-
-- [Gestion du cluster dynamique - TODO](https://github.com/theomi/API-2021-HTTP-Infra/tree/master/traefik)
 
 - [Management UI](https://github.com/theomi/API-2021-HTTP-Infra/tree/master/portainer)
