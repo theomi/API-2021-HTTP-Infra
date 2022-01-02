@@ -25,9 +25,9 @@ Comme vous pouvez le constater, Portainer est donc l'outil idéal pour réaliser
 
 ## Lancement de Portainer
 
-- Pour lancer portainer, il suffit de lancer le script `start.sh`
+- Pour lancer portainer, il suffit de lancer le script `create_volume.sh` la toute première fois seulement puis `start.sh` pour chaque démarrage du container
 - Une fois fait, il faut se rendre sur `localhost:9443` avec son navigateur
-- Lors du premier lancement de Portainer, une petite phase de configuration est nécessaire. Grâce au volume créé, les données générées sont persistantes et tout sera mémorisé
+- Lors du premier lancement de Portainer, une petite phase de configuration est nécessaire. Grâce au volume créé, les données générées sont persistantes et tout sera mémorisé (identifiants de connexion et autres données générées depuis Portainer).
 
 ## Résultat obtenu
 
