@@ -32,12 +32,12 @@ services:
     restart: always
     labels:
       - traefik.enable=true
-      - traefik.http.routers.express.rule=Host(`localhost`) && PathPrefix(`/api/students`)
+      - traefik.http.routers.express.rule=Host(`localhost`) && PathPrefix(`/api/animals`)
       - traefik.http.routers.express.middlewares=express-stripprefix
-      - traefik.http.middlewares.express-stripprefix.stripprefix.prefixes=/api/students
+      - traefik.http.middlewares.express-stripprefix.stripprefix.prefixes=/api/animals
       - traefik.http.routers.express.entrypoints=web
     depends_on:
-        - rproxy
+        - reverse-proxy
     build:
         context: ../step4/
     networks:
@@ -52,7 +52,7 @@ services:
       - traefik.http.middlewares.whoami-stripprefix.stripprefix.prefixes=/whoami
       - traefik.http.routers.whoami.entrypoints=web
     depends_on:
-        - rproxy
+        - reverse-proxy
     networks:
       - net-rproxy    
 
