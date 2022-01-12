@@ -53,11 +53,11 @@ labels:
 Configuration pour le service express :
 ```yml
 labels:
-- traefik.enable=true
-- traefik.http.routers.express.rule=Host(`localhost`) && PathPrefix(`/api/animals`)
-- traefik.http.routers.express.middlewares=express-stripprefix
-- traefik.http.middlewares.express-stripprefix.stripprefix.prefixes=/api/animals
-- traefik.http.routers.express.entrypoints=web
+    - traefik.enable=true
+    - traefik.http.routers.express.rule=Host(`localhost`) && PathPrefix(`/api/animals`)
+    - traefik.http.routers.express.middlewares=express-stripprefix
+    - traefik.http.middlewares.express-stripprefix.stripprefix.prefixes=/api/animals
+    - traefik.http.routers.express.entrypoints=web
 ```
 - Contient aussi l'instruction `Host` comme pour la configuration nginx mais avec un `PathPrefix` supplémentaire. Cette instruction est utilisée car on souhaite matcher le chemin `/api/animals`. Comme l'indique la doc de Traefik, il faut utiliser un `Path` si on souhaite écouter sur un chemin particulier.
 - L'instruction `stripprefix` est utilisée pour supprimer le prefix du chemin avant de transmettre la requête.

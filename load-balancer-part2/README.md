@@ -5,23 +5,48 @@
 Hadrien Louis & Théo Mirabile
 
 | ⚠ Cette partie utilise Traefik. Pour savoir comment nous l'avons installé / configuré, se rendre [à cette partie](https://github.com/theomi/API-2021-HTTP-Infra/tree/master/traefik) |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+|
 
 ## Introduction
 
-L'intérêt du _load balancing_ (équilibrage des charges) est qu'il est facile d'adapter le nombre de serveurs HTTP au nombre de requêtes client, et ce en temps réel. De plus, cela permet de prévenir l'indisponibilité du service en cas de panne d'un serveur, car le système de load balancing va aiguiller les requêtes vers un autre serveur disponible.
+Dans cette partie, nous mettons en œuvre deux manières le _sticky session_, qui, par le biais d'un cookie, va attribuer un serveur HTTP fixe à chaque client. Deux requêtes consécutives de ce même client seront donc traitées par le même serveur HTTP.
 
-Dans cette partie, nous mettons en œuvre deux manières de déterminer sur quel serveur la requête est aiguillée :
-
-- le _round-robin_, qui va attribuer tour à tour chaque requête à un serveur différent, et ce de manière cyclique (deux requêtes consécutives d'un même client vont donc être attribuées à deux serveurs HTTP distincts)
-- le _sticky session_, qui, par le biais d'un cookie, va attribuer un serveur HTTP fixe à chaque client. Deux requêtes consécutives de ce même client seront donc traitées par le même serveur HTTP.
-
-Dans les deux cas, si le serveur censé traiter la requête n'est plus disponible, le _load balancer_ va sélectionner un serveur alternatif pour traiter cette requête.
+Dans le cas ou un serveur censé traiter la requête n'est plus disponible, le _load balancer_ va sélectionner un serveur alternatif pour traiter cette requête.
 
 ## Installation
 
-Afin de faciliter les tests du bon fonctionnement de l'infrastructure, nous avons décidé d'utiliser l'image `traefik/whoami` qui consiste en un serveur HTTP basique qui, à chaque requête, retourne les en-têtes détaillés de cette dernière.
+Comme pour l'étape précédente, nous avons utilisé le container `traefik/whoami` qui consiste en un serveur HTTP basique qui, à chaque requête, retourne les en-têtes détaillés de cette dernière.
 
-![Exemple d'utilisation de whoami](figures/whoami_example.png)
+Pour configurer le sticky session dans Traefik, il est nécessaire d'ajouter les labels suivants dans le `docker-compose` de chaque service. Dans notre cas, nous les avons ajoutées pour les services : `whoami` et `web`. 
+
+Les lignes suivantes ont été ajoutées :
+
+```yml
+- traefik.http.services.whoami.loadbalancer.sticky=true
+- traefik.http.services.whoami.loadbalancer.sticky.cookie.name=traefik_cookie
+- traefik.http.services.whoami.loadbalancer.sticky.cookie.httpOnly=true
+```
+
+Ces instructions vont donc indiquer d'activer le sticky session et vont donner un nom au cookie. Rien de plus n'est à faire
+
 
 ## Résultat obtenu
+
+Une fois le `docker-compose` lancé, nous allons vérifier que le load balancer en mode sticky session fonctionne bien. Pour ce faire, nous allons utiliser notre container `whoami` pour vérifer cela.
+
+Lors de la première connexion, on voit que l'adresse IP du serveur ayant traité la requête est le `172.20.0.14`
+
+![Résultat](figures/whoami_1.png)
+
+Si on rafraîchit la page et contrairement à l'étape précédente, on observe que l'IP du serveur ayant traité la requête n'a pas changé. Le sticky session est donc fonctionnel.
+
+## Vérifications
+
+Il est également possible d'aller vérifier que le cookie a bien été créé. En ouvrant les devtools, on note que le cookie est bien présent et qu'il possède bien le nom spécifié dans le `docker-compose`
+
+![Résultat](figures/whoami_2.png)
+
+Si l'on supprime ce cookie et que l'on rafraîchit la page alors on peut noter qu'un autre serveur a traité la requête et qu'un nouveau cookie a été créé.
+
+![Résultat](figures/whoami_3.png)
+
