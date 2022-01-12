@@ -17,9 +17,9 @@ Dans le cas ou un serveur censé traiter la requête n'est plus disponible, le _
 
 Comme pour l'étape précédente, nous avons utilisé le container `traefik/whoami` qui consiste en un serveur HTTP basique qui, à chaque requête, retourne les en-têtes détaillés de cette dernière.
 
-Pour configurer le sticky session dans Traefik, il est nécessaire d'ajouter les labels suivants dans le `docker-compose` de chaque service. Dans notre cas, nous les avons ajoutées pour les services : `whoami` et `web`. 
+Pour configurer le sticky session dans Traefik, il est nécessaire d'ajouter les labels suivants dans le `docker-compose` de chaque service. Dans notre cas, nous les avons ajoutés pour les services : `whoami` et `web`. 
 
-Les lignes suivantes ont été ajoutées :
+Les lignes suivantes ont été ajoutées pour chaque service :
 
 ```yml
 - traefik.http.services.whoami.loadbalancer.sticky=true
@@ -32,7 +32,7 @@ Ces instructions vont donc indiquer d'activer le sticky session et vont donner u
 
 ## Résultat obtenu
 
-Une fois le `docker-compose` lancé, nous allons vérifier que le load balancer en mode sticky session fonctionne bien. Pour ce faire, nous allons utiliser notre container `whoami` pour vérifer cela.
+Une fois le `docker-compose` lancé, nous allons vérifier que le load balancer en mode sticky session fonctionne bien. Pour ce faire, nous allons utiliser notre container `whoami`. Il suffit donc de se rendre à l'adresse `localhost/whoami`
 
 Lors de la première connexion, on voit que l'adresse IP du serveur ayant traité la requête est le `172.20.0.14`
 

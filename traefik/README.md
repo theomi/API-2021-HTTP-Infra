@@ -48,7 +48,7 @@ labels:
     - traefik.http.routers.nginx.entrypoints=web
 ```
 
-- L'instruction `Host('localhost')` va vérifier si le domaine de la requête (valeur du champ de l'en-tête HTTP host) vaut bien localhost
+- L'instruction `Host('localhost')` va vérifier si le domaine de la requête (valeur du champ de l'en-tête HTTP host) vaut bien `localhost`
 
 Configuration pour le service express :
 ```yml
