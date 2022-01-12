@@ -8,7 +8,7 @@ Hadrien Louis & Théo Mirabile
 
 Pour la réalisation des deux étapes aditionnelles (Load balancing avec plusieurs noeuds et load balancing round-robin et sticky session), nous avons décidé d'utiliser Traefik comme load balancer. Nous avons fait ce choix car cet outil semble le plus pratique et le plus simple pour mettre en place les étapes suivantes.
 
-Cette documentation va donc présenter comment nous avons configuré Traefik pour les deux étapes additionnelles.
+Cette documentation va donc présenter la configuration de base de Traefik pour pouvoir ensuite faire les étapes suivantes.
 
 ## Installation
 
