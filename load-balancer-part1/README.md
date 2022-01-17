@@ -5,7 +5,7 @@
 Hadrien Louis & Théo Mirabile
 
 | ⚠ Cette partie utilise Traefik. Pour savoir comment nous l'avons installé / configuré, se rendre [à cette partie](https://github.com/theomi/API-2021-HTTP-Infra/tree/master/traefik) |
-| - |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 
 ## Introduction
 
@@ -66,3 +66,29 @@ Grâce à Docker compose, il est très facile de créer des instances multiples 
 Dans le cadre de ce laboratoire, nous avons décidé de créer 4 instances de whoami.
 
 ## Round-robin par défaut
+
+En faisan des recherches sur [le site web de Traefik](https://traefik.io/blog/traefik-2-0-docker-101-fc2893944b9d/) on tombe sur cette mention :
+
+> The LoadBalancer type is a round robin between all the available instances (called server).
+
+Cela signifie que si l'on démarre plusieurs instances du même service, le round robin sera utilisé par Traefik pour répartir les charges. C'est une bonne nouvelle, car cela veut dire que le round robin sera opérationnel sans configuration supplémentaire.
+
+## Résultat obtenu
+
+Pour le test, nous avons lancé notre docker-compose avec 4 instances de chaque service (serveur web, application express et serveur de test whoami\*) :
+
+```sh
+docker-compose up -d --scale web=4 --scale express=4 --scale whoami=4
+```
+
+Si l'on va ensuite sur l'adresse définie pour _whoami_ qui est donc `http://localhost/whoami` et que l'on actualise la page plusieurs fois, on remarque que l'adresse IP du serveur change à chaque requête, et ce de manière circulaire entre les quatre instances. Le Round Robin fonctionne.
+
+![Démonstration de fonctionnement du Round Robin](figures/round_robin_demo.gif)
+
+## Tests supplémentaires
+
+- Si l'on arrête manuellement une des instances de `whoami`, on remarque que l'instance en question a disparu de Traefik, et le Round Robin ne s'effectue plus que sur les 3 instances restantes.
+
+![Aperçu des instances de whoami sur Traefik](figures/whoami_instances.png)
+
+- En relançant l'instance en question, on remarque qu'elle réapparaît dans la liste. De plus, le Round Robin fonctionne à nouveau sur les 4 instances.
