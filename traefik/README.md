@@ -8,7 +8,7 @@ Hadrien Louis & Théo Mirabile
 
 Pour la réalisation des deux étapes aditionnelles (Load balancing avec plusieurs noeuds et load balancing round-robin et sticky session), nous avons décidé d'utiliser Traefik comme load balancer. Nous avons fait ce choix car cet outil semble le plus pratique et le plus simple pour mettre en place les étapes suivantes.
 
-Cette documentation va donc présenter comment nous avons configuré Traefik pour les deux étapes additionnelles.
+Cette documentation va donc présenter la configuration de base de Traefik pour pouvoir ensuite faire les étapes suivantes.
 
 ## Installation
 
@@ -48,16 +48,16 @@ labels:
     - traefik.http.routers.nginx.entrypoints=web
 ```
 
-- L'instruction `Host('localhost')` va vérifier si le domaine de la requête (valeur du champ de l'en-tête HTTP host) vaut bien localhost
+- L'instruction `Host('localhost')` va vérifier si le domaine de la requête (valeur du champ de l'en-tête HTTP host) vaut bien `localhost`
 
 Configuration pour le service express :
 ```yml
 labels:
-- traefik.enable=true
-- traefik.http.routers.express.rule=Host(`localhost`) && PathPrefix(`/api/animals`)
-- traefik.http.routers.express.middlewares=express-stripprefix
-- traefik.http.middlewares.express-stripprefix.stripprefix.prefixes=/api/animals
-- traefik.http.routers.express.entrypoints=web
+    - traefik.enable=true
+    - traefik.http.routers.express.rule=Host(`localhost`) && PathPrefix(`/api/animals`)
+    - traefik.http.routers.express.middlewares=express-stripprefix
+    - traefik.http.middlewares.express-stripprefix.stripprefix.prefixes=/api/animals
+    - traefik.http.routers.express.entrypoints=web
 ```
 - Contient aussi l'instruction `Host` comme pour la configuration nginx mais avec un `PathPrefix` supplémentaire. Cette instruction est utilisée car on souhaite matcher le chemin `/api/animals`. Comme l'indique la doc de Traefik, il faut utiliser un `Path` si on souhaite écouter sur un chemin particulier.
 - L'instruction `stripprefix` est utilisée pour supprimer le prefix du chemin avant de transmettre la requête.

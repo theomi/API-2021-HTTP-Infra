@@ -21,6 +21,9 @@ services:
       - traefik.enable=true
       - traefik.http.routers.nginx.rule=Host(`localhost`)
       - traefik.http.routers.nginx.entrypoints=web
+      - traefik.http.services.nginx.loadbalancer.sticky=true
+      - traefik.http.services.nginx.loadbalancer.sticky.cookie.name=traefik_cookie
+      - traefik.http.services.nginx.loadbalancer.sticky.cookie.httpOnly=true
     depends_on:
         - reverse-proxy
     build:

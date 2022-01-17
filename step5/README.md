@@ -6,11 +6,11 @@ Hadrien Louis & Théo Mirabile
 
 ## Introduction
 
-Contrairement à ce qui est proposé dans les diverses viédos du labo, nous n'avons pas utilisé Apache mais nginx et nous avons essayé de mettre en place une configuration un peu plus dynamique du reverse proxy que celle proposée dans les vidéos. En effet grâce à l'évolution de docker durant les dernières années, il est possible grâce à `docker-compose` de mettre en place une infrastructure complètement dynamique
+Contrairement à ce qui est proposé dans les diverses viédos du labo, nous n'avons pas utilisé Apache mais nginx et nous avons essayé de mettre en place une configuration un peu plus dynamique du reverse proxy que celle proposée dans les vidéos. En effet grâce à l'évolution de Docker durant les dernières années, il est possible grâce à `docker-compose` de mettre en place une infrastructure complètement dynamique.
 
 ## Configuration Docker
 
-Comme annoncé ci-dessus, nous avons utilisé `docker-compose` pour cette étape du labo. Ceci va nous permettre de spécifier dans un seul fichier les divers container à faire tourner. 
+Comme annoncé ci-dessus, nous avons utilisé `docker-compose` pour cette étape du labo. Ceci va nous permettre de spécifier dans un seul fichier les divers containers à faire tourner. 
 
 Dans le ficher `docker-compose.yml` on y trouve la déclaration des 3 services à faire tourner à savoir : `nginx`, `express` et le reverse proxy `rproxy`. Pour chaque service, nous déclarons la configuration suivante :
 
