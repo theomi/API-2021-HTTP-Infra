@@ -18,6 +18,51 @@ Dans ces deux parties additionnelles, nous mettons en œuvre deux manières de d
 
 Dans les deux cas, si le serveur censé traiter la requête n'est plus disponible, le _load balancer_ va sélectionner un serveur alternatif pour traiter cette requête.
 
-## Installation
+## Utilisation de `whoami`
 
-## Résultat obtenu
+Afin de faciliter les tests du bon fonctionnement de l'infrastructure, nous avons décidé d'utiliser l'image `traefik/whoami` qui consiste en un serveur HTTP basique qui, à chaque requête, retourne les en-têtes détaillés de cette dernière.
+Voici un exemple d'utilisation :
+![Exemple d'utilisation de whoami](figures/whoami_example.png)
+
+Pour la suite de cette partie, nous allons donc démarrer plusieurs instances de whoami en parallèle, puis effectuer des requêtes. Cela permettra de voir sur quelle instance la requête a été aiguillée.
+
+## Mise en place
+
+Commençons par ajouter un nouveau service à notre fichier `docker-compose.yml` :
+
+```
+  # On nomme le service "whoami"
+whoami:
+    image: traefik/whoami # On demande à utiliser l'image de whoami
+    restart: always       # Configure le redémarrage automatique
+    depends_on:
+      - reverse-proxy   # Le service n'est lancé qu'après le reverse proxy
+    networks:
+      - net-rproxy        # On ajoute le service au même réseau Docker
+```
+
+De plus, nous devons ajouter les `labels` liés à Traefik, comme expliqué dans la partie précédente. La configuration finale est la suivante :
+
+```
+  whoami:
+    image: traefik/whoami
+    restart: always
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.whoami.rule=Host(`localhost`) && PathPrefix(`/whoami`)
+      - traefik.http.routers.whoami.middlewares=whoami-stripprefix
+      - traefik.http.middlewares.whoami-stripprefix.stripprefix.prefixes=/whoami
+      - traefik.http.routers.whoami.entrypoints=web
+    depends_on:
+        - reverse-proxy
+    networks:
+      - net-rproxy
+```
+
+## Scalabilité des instances
+
+Grâce à Docker compose, il est très facile de créer des instances multiples d'un même service en utilisant l'option `--scale` dans la commande de lancement.
+
+Dans le cadre de ce laboratoire, nous avons décidé de créer 4 instances de whoami.
+
+## Round-robin par défaut
