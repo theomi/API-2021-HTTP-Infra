@@ -85,10 +85,12 @@ Si l'on va ensuite sur l'adresse définie pour _whoami_ qui est donc `http://loc
 
 ![Démonstration de fonctionnement du Round Robin](figures/round_robin_demo.gif)
 
-## Tests supplémentaires
+## Arrêt et démarrage manuel d'une instance
 
 - Si l'on arrête manuellement une des instances de `whoami`, on remarque que l'instance en question a disparu de Traefik, et le Round Robin ne s'effectue plus que sur les 3 instances restantes.
 
-![Aperçu des instances de whoami sur Traefik](figures/whoami_instances.png)
+![Liste des 3 instances de whoami sur Traefik](figures/whoami_instance_missing.png)
 
 - En relançant l'instance en question, on remarque qu'elle réapparaît dans la liste. De plus, le Round Robin fonctionne à nouveau sur les 4 instances.
+
+![Liste des 4 instances de whoami sur Traefik](figures/whoami_all_instances.png)
